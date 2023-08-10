@@ -1,0 +1,4 @@
+<h1><%= @category.name %> Courses</h1>
+<% @category.courses.each do |course| %>
+  <p><%= link_to course.name, course_path(course) %></p>
+<% end %>
