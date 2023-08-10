@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:student, :teacher, :admin]
+  enum role: [:student, :teacher]
   has_many :courses, foreign_key: :teacher_id # For teachers
   has_and_belongs_to_many :enrolled_courses, class_name: 'Course'
 
@@ -18,7 +18,7 @@ class User < ApplicationRecord
       # Additional student-specific logic
     elsif teacher?
       # Additional teacher-specific logic
-    elsif admin?
+    elsif admins?
       # Additional admin-specific logic
     end
   end
