@@ -1,1 +1,16 @@
-<h1>Hello It's  Course's index action</h1>
+<h1>Your Courses</h1>
+<% if can? :create, Course %>
+  <%= link_to 'New Course', new_category_path %>
+<% end %>
+<ul>
+  <% @courses.each do |course| %>
+    <li><%= course.title %></li>
+    <% if can? :update, course %>
+        <%= link_to 'Edit', edit_course_path(course) %>
+      <% end %>
+      <% if can? :destroy, course %>
+        <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+  <% end %>
+</ul>
+<%= link_to 'New Course', new_course_path %>

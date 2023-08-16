@@ -4,22 +4,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:student, :teacher, :admin]
-  has_many :courses, foreign_key: :teacher_id # For teachers
-  has_and_belongs_to_many :enrolled_courses, class_name: 'Course'
-
-  after_create :send_welcome_email
-
-  private
-
-  def send_welcome_email
-    if student?
-      StudentMailer.welcome_email(self).deliver_now
-      # Additional student-specific logic
-    elsif teacher?
-      # Additional teacher-specific logic
-    elsif admin?
-      # Additional admin-specific logic
-    end
+         enum role: { student: 0, teacher: 1, admin: 2 }
+    # Role enum
+    # Associations
+    has_many :courses, foreign_key: 'teacher_id'
+    has_many :categories, foreign_key: 'teacher_id'
+    has_many :purchases, foreign_key: 'student_id'
   end
-end
+  
+
+  #after_create :send_welcome_email
+
+  #private
+
+#def send_welcome_email
+ #   if student?
+  #####end
