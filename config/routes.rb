@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
-  devise_for :users
-  devise_for :students, path: 'students', path_names: { sign_up: 'signup', sign_in: 'login' }
-  devise_for :teachers, path: 'teachers', path_names: { sign_up: 'signup', sign_in: 'login' }
-  # devise_for :admins, path: 'admins', path_names: { sign_up: 'signup', sign_in: 'login' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations', # Customize Devise registrations controller if needed
+    confirmations: 'users/confirmations' # Customize Devise confirmations controller if needed
+  }
 
-  get 'homes/page'
-  root to: 'homes#page' # Use 'homes#page' instead of 'homes/page'
-  #resources :teachers
-  resources :categories do
-    resources :courses, only: [:new, :create]
-  end
-  resources :courses, except: [:new, :create]
-  #resources :students
-  #resources :purchases
+  root 'home#index' # Landing page
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :categories do # CategoriesController
+  resources :courses 
+  end # CoursesController
+  resources :purchases, only: [:create] # PurchasesController (for student purchases)
+
+  resources :teachers, only: [:index, :new, :create, :edit, :update] # TeachersController
+
+  get 'search', to: 'search#index' # SearchController
+
+  # Other routes
+
+  # Custom routes for handling sign-out and teacher sign-up
+  #devise_scope :user do
+   # get 'teachers/sign_up', to: 'teachers#new' # Customize if needed
+    #delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+  #end
 end
