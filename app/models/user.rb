@@ -8,18 +8,11 @@ class User < ApplicationRecord
   has_many :courses, foreign_key: :teacher_id # For teachers
   has_and_belongs_to_many :enrolled_courses, class_name: 'Course'
 
-  after_create :send_welcome_email
+  #after_create :send_welcome_email
 
-  private
+  #private
 
-  def send_welcome_email
-    if student?
-      StudentMailer.welcome_email(self).deliver_now
-      # Additional student-specific logic
-    elsif teacher?
-      # Additional teacher-specific logic
-    elsif admins?
-      # Additional admin-specific logic
-    end
-  end
+#def send_welcome_email
+ #   if student?
+  #####end
 end

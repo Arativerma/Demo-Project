@@ -12,6 +12,8 @@ Rails.application.configure do
   config.eager_load = false
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   # "taskcraftteamtest@gmail.com",
 
 #password:  "msvddxqmawctwkwg",
@@ -21,9 +23,9 @@ Rails.application.configure do
   domain:               'taskcraft.in',
   user_name:            "taskcraftteamtest@gmail.com",
   password:             "msvddxqmawctwkwg",
-  authentication:       :login,
+  authentication:       :plain,
   enable_starttls_auto: true
-}
+  }
   # Show full error reports.
   config.consider_all_requests_local = true
 

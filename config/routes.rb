@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #devise_for :users
+  devise_for :users
   devise_for :students, path: 'students', path_names: { sign_up: 'signup', sign_in: 'login' }
   devise_for :teachers, path: 'teachers', path_names: { sign_up: 'signup', sign_in: 'login' }
   # devise_for :admins, path: 'admins', path_names: { sign_up: 'signup', sign_in: 'login' }
