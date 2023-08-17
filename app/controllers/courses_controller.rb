@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-    before_action :authenticate_user! # Assuming Devise for authentication
-    load_and_authorize_resource # Load and authorize Course
+    #before_action :authenticate_user! # Assuming Devise for authentication
+    #load_and_authorize_resource # Load and authorize Course
   
     def index
       @courses = Course.where(category: current_user.categories)
@@ -24,12 +24,11 @@ class CoursesController < ApplicationController
       # @course is loaded by load_and_authorize_resource
     end
   
-    def update
-      if @course.update(course_params)
+    def purchase
+       @course = Course.find(course_params)
+        current_user.purchases.create(course: @course)
         redirect_to courses_path, notice: 'Course updated successfully.'
-      else
-        render :edit
-      end
+      
     end
   
     def destroy

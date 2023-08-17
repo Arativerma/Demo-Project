@@ -1,17 +1,2 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Welcome to Task Academy!
-    <%= @user.name %></h1>
-    <p>
-      You have successfully signed up to Task Academy!      your username is: <%= @user.login %>.<br>
-    </p>
-    <p>Your credentials:</p>
-  <p>Email: <%= @user.email %></p>
-  <p>Password: <%= @password %></p>
-  <p>Please log in and start managing your courses.</p>
-</body>
-</html>
+<h1>Welcome to Task Academy!</h1>
+<p>Your credentials: <%= @user.email %> (email) and <%= @user.password %> (password)</p>
