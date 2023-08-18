@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
-  belongs_to :teacher, class_name: 'User'
+  #belongs_to :teacher, class_name: 'User'
   belongs_to :category
+  has_many_attached :course_videos
   has_many :purchases
-  has_many :students, through: :purchases, source: :student
+  #has_many :students, through: :purchases, source: :student
 end

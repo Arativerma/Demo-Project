@@ -5,6 +5,7 @@ ruby '2.6.5'
 gem  'devise'
 gem 'cancancan'
 gem 'pg'
+gem 'activeadmin'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.4'
 # Use sqlite3 as the database for Active Record

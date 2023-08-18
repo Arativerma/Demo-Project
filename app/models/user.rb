@@ -13,10 +13,10 @@ class User < ApplicationRecord
   end
   
 
-  #after_create :send_welcome_email
+  after_create :send_welcome_email
 
-  #private
+  private
 
-#def send_welcome_email
- #   if student?
-  #####end
+def send_welcome_email
+  if student?
+  end

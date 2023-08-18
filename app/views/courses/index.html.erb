@@ -3,14 +3,35 @@
   <%= link_to 'New Course', new_category_path %>
 <% end %>
 <ul>
+  
   <% @courses.each do |course| %>
     <li><%= course.title %></li>
     <% if can? :update, course %>
         <%= link_to 'Edit', edit_course_path(course) %>
       <% end %>
-      <% if can? :destroy, course %>
-        <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
+     <% if can? :destroy, course %>
+     <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+     <% end %>
   <% end %>
 </ul>
+  <h3>Course Videos:</h3>
+<ul>
+  <% @course.course_videos.each do |video| %>
+    <li><%= link_to video.filename, rails_blob_path(video) %></li>
+  <% end %>
+</ul>
+<!-- app/views/courses/index.html.erb -->
+
+<% @categories.each do |category| %>
+  <h3><%= category.name %> Courses:</h3>
+  <ul>
+    <% category.courses.each do |course| %>
+      <li><%= course.title %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+
 <%= link_to 'New Course', new_course_path %>
+

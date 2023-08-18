@@ -1,6 +1,0 @@
-<h1>Admin Panel - Teachers</h1>
-<ul>
-  <% @teachers.each do |teacher| %>
-    <li><%= teacher.email %> - <%= link_to 'Manage', manage_teacher_path(teacher) %></li>
-  <% end %>
-</ul>

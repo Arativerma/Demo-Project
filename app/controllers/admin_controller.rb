@@ -12,4 +12,4 @@ class AdminController < ApplicationController
      authorize! :manage, :admin
   end
   end
-end
+

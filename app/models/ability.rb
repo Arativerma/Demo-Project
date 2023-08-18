@@ -7,8 +7,8 @@ class Ability
       # ...
       can :manage, Category, teacher_id: user.id if user.teacher?
       can :manage, Course, teacher_id: user.id if user.teacher?
-      can :read, Category, Course
-      can :create, Course if user.teacher? || user.student?
+      #can :read, Category, Course
+      can :read, Course if user.teacher? || user.student?
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

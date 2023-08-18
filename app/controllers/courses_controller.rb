@@ -2,9 +2,24 @@ class CoursesController < ApplicationController
     #before_action :authenticate_user! # Assuming Devise for authentication
     #load_and_authorize_resource # Load and authorize Course
   
-    def index
-      @courses = Course.where(category: current_user.categories)
-    end
+    
+     # @courses = Course.where(category: current_user.categories)
+      def index
+    @categories = Category.all
+  end
+
+    
+
+    def associate_videos
+    
+    @course = Course.find(params[:id])
+    videos = [video1, video2, video3] # Replace with your actual video objects or URLs
+
+    @course.course_videos.attach(videos)
+
+    redirect_to @course, notice: 'Videos associated successfully.'
+  end
+ 
   
     def new
       @course = Course.new
