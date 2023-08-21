@@ -1,11 +1,13 @@
 class CoursesController < ApplicationController
-    #before_action :authenticate_user! # Assuming Devise for authentication
-    #load_and_authorize_resource # Load and authorize Course
+    before_action :authenticate_user! # Assuming Devise for authentication
+    #load_and_authorize_resource 
+    #Load and authorize Course
   
     
      # @courses = Course.where(category: current_user.categories)
       def index
-    @categories = Category.all
+    #@categories = Category.all
+      @courses  = Course.all
   end
 
     
@@ -26,7 +28,7 @@ class CoursesController < ApplicationController
     end
   
     def create
-        @category = Category.find(params[:category_id])
+        @category = Category.find_by(id: params[:id])
         @course = @category.courses.build(course_params)    
       if @course.save
         redirect_to courses_path, notice: 'Course created successfully.'

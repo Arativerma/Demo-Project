@@ -1,10 +1,6 @@
 <h1>Edit Course</h1>
-<%= form_for @course do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.label :price %>
-  <%= f.number_field :price %>
-  <%= f.submit 'Update Course' %>
-<% end %>
+
+<%= render 'form', course: @course %>
+
+<%= link_to 'Show', @course %> |
+<%= link_to 'Back', courses_path %>
