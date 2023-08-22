@@ -25,17 +25,22 @@ class CoursesController < ApplicationController
   
     def new
       @course = Course.new
+      @category =Category.all
     end
   
     def create
-        @category = Category.find_by(id: params[:id])
-        @course = @category.courses.build(course_params)    
-      if @course.save
-        redirect_to courses_path, notice: 'Course created successfully.'
-      else
-        render :new
+  @course = Course.new(course_params)
+  @course.category_id = params[:course][:category_id] # Associate with the chosen category
+
+  if @course.save
+    redirect_to @course 
+  else
+    render :new
+  end
+end
+      def show
+    @course = Course.find(params[:id])
       end
-    end
   
     def edit
       # @course is loaded by load_and_authorize_resource
@@ -56,7 +61,7 @@ class CoursesController < ApplicationController
     private
   
     def course_params
-      params.require(:course).permit(:title, :description, :category_id)
+      params.require(:course).permit(:title, :description, :category_id,course_videos:[])
     end
   end
   

@@ -7,12 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-# db/seeds.rb
-
-Web Development_category = Category.create(name: "Web Development")
-Mobile Development_category= Category.create(name: "Mobile Development")
-Software Development_category = Category.create(name: "Software Development ")
-
+# db/seed
+Category.create(name: "Web Development")
+Category.create(name: "Mobile Development")
+Category.create(name: "Software Development ")
+=begin
 Web Development_category.courses.create(title: "HTML")
 Web Development_category.courses.create(title: "CSS")
 Web Development_category.courses.create(title: "Javascript")
@@ -21,3 +20,4 @@ Mobile Development_category.courses.create(title: "Android")
 
 Software Development_category.courses.create(title: "Java")
 Software Development_category.courses.create(title: "Python")
+=end
