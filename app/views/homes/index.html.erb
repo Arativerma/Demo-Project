@@ -5,6 +5,7 @@
 </p>
   <%#= link_to 'Home Page', home_path %>
 
+ 
 <% if user_signed_in? %>
   <% if current_user.teacher? %>
     <%= link_to 'Create a New Course', new_course_path %>

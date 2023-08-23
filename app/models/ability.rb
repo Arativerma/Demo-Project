@@ -1,14 +1,18 @@
 # frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
   def initialize(user)
-      # ...
-      can :manage, Category, teacher_id: user.id if user.teacher?
-      can :manage, Course, teacher_id: user.id if user.teacher?
-      #can :read, Category, Course
-      can :read, Course if user.teacher? || user.student?
+    user ||= User.new # Guest user (not logged in)
+
+    if user.teacher?
+      can :manage, [Category, Course]
+    elsif user.student?
+      can :read, [Course]
+    end
+ 
+
+
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     load_and_authorize_resource # Load and authorize Category
   
     def index
-      @categories = Category.where(teacher: current_user)
+      @categories = Category.all #where(teacher: current_user)
     end
   
     def new
@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     end
   
     def create
-      @category = current_user.categories.build(category_params)
+      @category = categories.new(category_params)
       if @category.save
         redirect_to categories_path, notice: 'Category created successfully.'
       else

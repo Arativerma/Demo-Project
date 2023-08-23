@@ -13,6 +13,14 @@ class User < ApplicationRecord
 
   after_create :welcome_email
 
+    def teacher?
+    role == 'teacher'
+  end
+
+  def student?
+    role == 'student'
+  end
+
   private
 
   def welcome_email

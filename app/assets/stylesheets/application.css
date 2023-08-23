@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.custom-video {
+  width: 25%; /* Set the desired width */
+  height: 25%; /* Maintain aspect ratio */
+}

@@ -6,9 +6,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name])
-  end
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+  end 
   
+  def new
+  build_resource({})
+  resource.role = params[:role] if params[:role] # Assign role from query parameter
+  respond_with self.resource
+end
   
   def after_sign_up_path_for(resource)
     new_user_session_path
