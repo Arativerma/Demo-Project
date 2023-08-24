@@ -12,16 +12,17 @@ class User < ApplicationRecord
   has_many :purchases, foreign_key: 'student_id'
 
   after_create :welcome_email
+ before_create :set_default_role
 
-    def teacher?
-    role == 'teacher'
-  end
-
-  def student?
-    role == 'student'
-  end
+ scope :teachers, -> { where(role: 'teacher') }
 
   private
+ 
+  def set_default_role
+    self.role ||= 'student' # Set the default role to 'student' if no role is specified
+  end
+
+  
 
   def welcome_email
     if student?

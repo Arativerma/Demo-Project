@@ -4,12 +4,18 @@ class Ability
 
   def initialize(user)
     user ||= User.new # Guest user (not logged in)
+    
 
-    if user.teacher?
-      can :manage, [Category, Course]
+    if user.admin?
+      can :manage, :all # Admin can manage all resources
+    elsif user.teacher?
+      can :manage, Category # Teacher can manage categories
+      can :manage, Course, user_id: user.id # Teacher can manage their own courses
     elsif user.student?
-      can :read, [Course]
-    end
+      can :read, Category # Student can read categories
+      can :read, Course # Student can read courses
+      can :purchase, Course # Student can purchase courses
+    end 
  
 
 

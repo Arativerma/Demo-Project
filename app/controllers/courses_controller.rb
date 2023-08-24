@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
     before_action :authenticate_user! # Assuming Devise for authentication
-    load_and_authorize_resource 
+    #load_and_authorize_resource 
     #Load and authorize Course
   
     
