@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
     before_action :authenticate_user! # Assuming Devise for authentication
-    #load_and_authorize_resource 
+    load_and_authorize_resource 
     #Load and authorize Course
   
     
@@ -45,13 +45,37 @@ end
     def edit
       # @course is loaded by load_and_authorize_resource
     end
-  
-    def purchase
-       @course = Course.find(course_params)
-        current_user.purchases.create(course: @course)
-        redirect_to courses_path, notice: 'Course updated successfully.'
-      
+     def add_to_cart
+    @course = Course.find(params[:id]) # Retrieve the course
+    @cart = current_user.cart || current_user.build_cart # Get or create the user's cart
+
+    # Check if the course is already in the cart
+    if @cart.courses.include?(@course)
+      flash[:notice] = "Course is already in your cart."
+    else
+      # Add the course to the cart
+      @cart.cart_items.create(course: @course, price: @course.price)
+      flash[:notice] = "Course added to your cart."
     end
+
+    @cart.save # Save the cart changes
+    redirect_to cart_path # Redirect to the cart page
+  end
+
+     def start_purchase
+    @course = Course.find(params[:id])
+  end
+
+  def complete_purchase
+    @course = Course.find(params[:id])
+    # Implement purchase logic here
+    # Update user's access to the course, handle payment, etc.
+    if purchase_successful?
+      redirect_to @course, notice: 'Course purchased successfully!'
+    else
+      redirect_to @course, alert: 'Purchase failed. Please try again.'
+    end
+  end
   
     def destroy
       @course.destroy
@@ -61,7 +85,7 @@ end
     private
   
     def course_params
-      params.require(:course).permit(:title, :description, :category_id,course_videos:[])
+      params.require(:course).permit(:title, :description, :price, :category_id,course_videos:[])
     end
   end
   

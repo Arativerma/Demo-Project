@@ -3,15 +3,12 @@
 <p>
   Start your learning journey today by exploring our wide range of courses!
 </p>
-  <%#= link_to 'Home Page', home_path %>
 
- 
 <% if user_signed_in? %>
   <% if current_user.teacher? %>
     <%= link_to 'Create a New Course', new_course_path %>
     <%= link_to 'Manage Categories', categories_path %>
   <% else %>
- 
     <%= link_to 'Browse Courses', courses_path %>
   <% end %>
 <% else %>

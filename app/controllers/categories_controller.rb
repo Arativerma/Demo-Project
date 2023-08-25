@@ -12,12 +12,16 @@ class CategoriesController < ApplicationController
   
     def create
       @category = categories.new(category_params)
+       @category_id = params[:course][:category_id]
       if @category.save
         redirect_to categories_path, notice: 'Category created successfully.'
       else
         render :new
       end
     end
+     def show
+     @category = Category.find(params[:id])
+     end
   
     def edit
       # @category is loaded by load_and_authorize_resource

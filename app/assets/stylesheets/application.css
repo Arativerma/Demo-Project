@@ -13,7 +13,13 @@
  *= require_tree .
  *= require_self
  */
+  /* Import other stylesheets */
+@import 'signup';
+@import 'bootstrap';
 .custom-video {
   width: 25%; /* Set the desired width */
   height: 25%; /* Maintain aspect ratio */
+}
+body {
+  padding-top: 250px; // Adjust this value as needed
 }
