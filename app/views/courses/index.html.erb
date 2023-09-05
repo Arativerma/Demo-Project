@@ -1,4 +1,5 @@
 <h1>Available Courses</h1>
+<p>Welcome, <%= current_user.email %>!</p>
 
 <table>
   <tr>
@@ -13,7 +14,8 @@
       <td><%= course.title %></td>
       <td><%= course.description %></td>
       <td><%= course.price %></td>
-      <td><%= link_to 'Add to Cart', add_to_cart_course_path(course), method: :post %></td>
+      <td><%#= link_to 'Add to Cart', add_to_cart_course_path(@course), method: :post %></td>
+      <td><%= button_to "Add to cart", line_items_path(:course_id => course.id)%></td>
 
       <td><%= link_to 'Show', course %></td>
       <td><%= link_to 'Edit', edit_course_path(course) %></td>

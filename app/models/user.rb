@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
 
   enum role: { student: 0, teacher: 1, admin: 2 }
   
@@ -24,7 +25,6 @@ class User < ApplicationRecord
   end
 
   
-
   def welcome_email
     if student?
       UserMailer.welcome_email(self).deliver_now

@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   def index
-    if current_user
+    if user_signed_in?
       if current_user.admin?
         # Content for admin users
         @teachers = Teacher.all
@@ -21,3 +21,4 @@ class HomesController < ApplicationController
     end
   end
 end
+
