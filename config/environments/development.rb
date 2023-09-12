@@ -77,6 +77,10 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  
+   # pk_test_51NmzNCSEtCoZrsXCSkqKytPMy9rPOWn6wxwvzhD06uHsAojSP1SuiVFl9ZoPfV2ckPmzzxVOmmP9WLNU7nCw2rgU00zu9HNk1K
+   # sk_test_51NmzNCSEtCoZrsXCn7Dx25oZDPgz47pcDo64gsbJhpD3OXV3leLN8dbBtoXH08mUoO1IVWoWXU80jHZa4zArIy0R00yAlJ5EZq
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

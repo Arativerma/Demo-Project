@@ -1,0 +1,29 @@
+<h1>Your Cart</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @line_items.present? %>
+      <% @line_items.each do |line_item| %>
+        <tr>
+          <td><%= line_item.course&.title %></td>
+          <td><%= number_to_currency(line_item.course&.price) %></td>
+          <td><%= number_to_currency(line_item.subtotal) %></td>
+          
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">Your cart is empty.</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Continue Shopping', courses_path, class: 'btn btn-secondary' %>

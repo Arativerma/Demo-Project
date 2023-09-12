@@ -3,6 +3,7 @@ class Course < ApplicationRecord
   belongs_to :category
   has_many_attached :course_videos #Active storage 
   validate :validate_course_videos
+  has_many :orders
   has_many :line_items
   # has_many :carts, through: :cart_courses
 private

@@ -1,0 +1,56 @@
+<!-- <h2>Cart show</h2>
+<ul>
+
+  <% @cart.line_items.each do |line_item| %>
+    
+    <li>
+      <% if @cart.line_items.any? %>
+      Item: <%= line_item.course.title %>
+       Price: <%= number_to_currency(line_item.course.price) %>
+      
+    <ul>
+    
+
+      <li>
+        <%= link_to "Remove item", line_items_path(line_item), method: :delete %>
+      </li>
+    </ul>
+    <% else %>
+    Courses not found 
+    <% end %>
+  </li>
+  <% end %>
+</ul>
+ -->
+
+
+
+
+
+<div class="cart-container">
+  <h2>Cart</h2>
+  <ul>
+    <% if @cart.line_items.any? %>
+      <% @cart.line_items.each do |line_item| %>
+        <li class="cart-item">
+          <div class="item-details">
+            Item: <%= line_item.course.title %><br>
+            Price: <%= number_to_currency(line_item.course.price) %><br>
+          </div>
+          <!-- Buttons for cart actions -->
+          <div class="cart-buttons">
+           
+            <%= link_to "Remove item", remove_item_cart_path(:id => line_item), method: :delete, data: { confirm: "Are you sure?" } %>
+
+            <%#= link_to "Remove item", remove_item_cart_path(:id => line_item), method: :delete %>
+          </div>
+        </li>
+      <% end %>
+    <% else %>
+      <li>Your cart is empty.</li>
+    <% end %>
+  </ul>
+    <%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>
+   <%= button_to "Checkout", new_payment_path, class: "btn btn-primary" %>
+  <%#= link_to "Empty cart", cart_path(@current_cart), method: :delete, data: {confirm: "Are you sure?"} %>
+</div>

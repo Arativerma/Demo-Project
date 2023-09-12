@@ -1,0 +1,44 @@
+ <h2>Checkout</h2>
+<%= form_for @payment, url: payments_path, method: :post do |f| %>
+<%#= form_with model: @payment, local: true do |form| %>
+  <!-- User Details -->
+  <div class="form-group">
+    <%= form.label :full_name, 'Full Name' %>
+    <%= form.text_field :full_name, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Payment Information -->
+  <div class="form-group">
+    <label>Card Information</label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+  </div>
+
+  <!-- Used to display form errors. -->
+  <div id="card-errors" role="alert"></div>
+
+  <!-- Submit Button -->
+  <%= form.submit 'Submit Payment', class: 'btn btn-primary' %>
+<% end %> 
+
+
+<!-- 
+<%= form_tag payments_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>price: $500</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="500"
+          data-locale="auto"></script>
+<% end %> -->

@@ -1,0 +1,19 @@
+
+<h1>Line Item Details</h1>
+
+<div>
+  <strong>Course:</strong>
+  <%= @lineitem.course.title %>
+</div>
+
+<div>
+  <strong>Price:</strong>
+  <%= number_to_currency(@lineitem.price) %>
+</div>
+
+<div>
+  <strong>Subtotal:</strong>
+  <%= number_to_currency(@lineitem.subtotal) %>
+</div>
+
+<%= link_to 'Back to Cart', cart_path(@lineitem.cart) %>

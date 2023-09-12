@@ -1,0 +1,52 @@
+<%= form_for @payment do |f| %>
+  <!-- Payment form fields -->
+  <div class="form-group">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :currency %>
+    <%= f.text_field :currency, class: 'form-control' %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :payment_method_types %>
+    <%= f.text_field :payment_method_types, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :card_number %>
+    <%= f.text_field :card_number, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :expiration_month %>
+    <%= f.text_field :expiration_month, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :expiration_year %>
+    <%= f.text_field :expiration_year, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cardholder_name %>
+    <%= f.text_field :cardholder_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :billing_address %>
+    <%= f.text_field :billing_address, class: 'form-control' %>
+  </div>
+
+  <!-- Add more payment fields as needed -->
+
+  <div class="form-group">
+    <%= f.submit 'Submit Payment', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+  
+
+
+  # :string

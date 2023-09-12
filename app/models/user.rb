@@ -3,12 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
 
   enum role: { student: 0, teacher: 1, admin: 2 }
   
   # Associations
   has_one :cart
+  has_many :orders
   has_many :courses, foreign_key: 'teacher_id'
   has_many :categories, foreign_key: 'teacher_id'
   has_many :purchases, foreign_key: 'student_id'

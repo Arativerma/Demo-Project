@@ -1,0 +1,18 @@
+
+<%= render 'shared/header' %>
+<h1 class="category-Title"><%= @category.name %> Courses</h1>
+
+<ul class="course-list">
+  <% @category.courses.each do |course| %>
+    <li class="course-item"><%= link_to course.title, course %></li>
+  <% end %>
+</ul>
+
+<% if can?(:update, @category) %>
+  <%= link_to 'Edit', edit_category_path(@category) %>
+<% end %>
+
+<% if can?(:destroy, @category) %>
+  <%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<%= render 'shared/footer' %>
