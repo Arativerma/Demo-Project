@@ -8,7 +8,7 @@ class LineItemsController < ApplicationController
       # Find the line_item with the chosen_course
       @line_item = @current_cart.line_items.find_by(course_id: chosen_course.id)
       # Increment the line_item's quantity by one
-      @line_item.quantity += 1
+      
     else
       @line_item = @current_cart.line_items.create(course_id: chosen_course.id)
       # @line_item.cart = @current_cart

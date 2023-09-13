@@ -23,8 +23,8 @@
 <%# else %>
  <%#= link_to "Sign Up", new_user_registration_path %>
   <!-- app/views/layouts/application.html.erb or within your view file -->
-<script src="https://js.stripe.com/v3/"></script>
-<script>
+ <script src="https://js.stripe.com/v3/"></script> 
+<!-- <script>
   // Create a Stripe object.
   var stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
 
@@ -75,7 +75,7 @@
     // Submit the form.
     form.submit();
   }
-</script>
-
+</script> -->
+ 
   </body>
 </html>

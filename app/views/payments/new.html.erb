@@ -1,44 +1,66 @@
- <h2>Checkout</h2>
-<%= form_for @payment, url: payments_path, method: :post do |f| %>
-<%#= form_with model: @payment, local: true do |form| %>
-  <!-- User Details -->
-  <div class="form-group">
-    <%= form.label :full_name, 'Full Name' %>
-    <%= form.text_field :full_name, class: 'form-control', required: true %>
-  </div>
+<%#= form_with(model: @payment, url: payment_create_path, method: :post) do |form| %>
+<%= form_for @payment do |form| %>
+  <h2>checkout</h2>
 
-  <!-- Payment Information -->
-  <div class="form-group">
-    <label>Card Information</label>
-    <div id="card-element">
-      <!-- A Stripe Element will be inserted here. -->
+  <!-- Display any validation errors -->
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% @payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
+  <% end %>
+
+  <!-- Payment fields -->
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
   </div>
 
-  <!-- Used to display form errors. -->
-  <div id="card-errors" role="alert"></div>
-
-  <!-- Submit Button -->
-  <%= form.submit 'Submit Payment', class: 'btn btn-primary' %>
-<% end %> 
+  <div class="field">
+    <%= form.label :currency %>
+    <%= form.text_field :currency %>
+  </div>
 
 
-<!-- 
-<%= form_tag payments_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <span>price: $500</span>
-    </label>
-  </article>
+<div class="form-group">
+    <%= form.label :payment_method_types %>
+    <%= form.text_field :payment_method_types, class: 'form-control' %>
+  </div>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="500"
-          data-locale="auto"></script>
-<% end %> -->
+  <div class="form-group">
+    <%= form.label :card_number %>
+    <%= form.text_field :card_number, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :expiration_month %>
+    <%= form.text_field :expiration_month, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :expiration_year %>
+    <%= form.text_field :expiration_year, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cardholder_name %>
+    <%= form.text_field :cardholder_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :billing_address %>
+    <%= form.text_field :billing_address, class: 'form-control' %>
+  </div>
+
+  <!-- Add more payment fields as needed -->
+
+  <div class="form-group">
+    <%= form.submit 'Submit Payment', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+  

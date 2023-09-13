@@ -51,6 +51,11 @@
     <% end %>
   </ul>
     <%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>
-   <%= button_to "Checkout", new_payment_path, class: "btn btn-primary" %>
+     <%= button_to "Checkout", new_payment_path, class: "btn btn-primary" %>
+    <%#byebug %>
+   <%#= button_to "Checkout", payment_create_path, params: {id: @cart.id}, remote: true, class: "btn btn-primary" %>
+  <%#= button_to 'Proceed to Pay', payment_create_path, method: :post %>
+   <%#= button_to "Checkout", payment_create_path,params: {id: cart_id}, remote: true  class: "btn btn-primary" %>
+   <%#= button_to "Checkout", payment_create_path,params: {id: cart_id}, remote: true  class: "btn btn-primary" %>
   <%#= link_to "Empty cart", cart_path(@current_cart), method: :delete, data: {confirm: "Are you sure?"} %>
 </div>
