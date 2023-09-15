@@ -1,41 +1,49 @@
 class LineItemsController < ApplicationController
-  # before_action :set_current_cart, only: [:create]
+  before_action :set_current_cart, only: [:create]
 
   def create
-    chosen_course = Course.find_by(id: params[:course_id])
-
+   chosen_course = Course.find_by(id: params[:course_id])
+     line_item = LineItem.new(course: chosen_course, cart: @current_cart)
+    # Check if the course is already in the cart
     if @current_cart.courses.include?(chosen_course)
-      # Find the line_item with the chosen_course
       @line_item = @current_cart.line_items.find_by(course_id: chosen_course.id)
-      # Increment the line_item's quantity by one
-      
     else
-      @line_item = @current_cart.line_items.create(course_id: chosen_course.id)
-      # @line_item.cart = @current_cart
-      # @line_item.course = chosen_course
+      @line_item = LineItem.new(course: chosen_course, cart: @current_cart)
     end
 
-    # @line_item.save
+    if @line_item.save
+
+      redirect_to cart_path(chosen_course)
+    # else
+      # Handle any errors that may occur during line item creation
+      # You can add your error handling logic here
+    end
+  end
+
+  def destroy
+    @line_item = LineItem.find(params[:id])
+    @line_item.destroy
     redirect_to cart_path(@current_cart)
   end
-  def destroy
-  @line_item = LineItem.find(params[:id])
-  @line_item.destroy
-  redirect_to cart_path(@current_cart)
-end  
 
   private
 
   def set_current_cart
-    byebug
-    @current_cart = current_cart
-  end
+  @current_cart = Cart.find_by(id: session[:cart_id])
 
-  def line_item_params
-    params.require(:line_item).permit(:course_id, :cart_id)
+  if @current_cart.nil?
+    @current_cart = Cart.create
+    session[:cart_id] = @current_cart.id
   end
+rescue ActiveRecord::RecordNotFound
+  @current_cart = Cart.create
+  session[:cart_id] = @current_cart.id
 end
 
+  def line_item_params
+    params.require(:line_item).permit(:course_id, :price, :cart_id, :order_id)
+  end
+end
 
 
 
@@ -118,6 +126,27 @@ end
 #     params.require(:line_item).permit(:course_id, :price, :cart_id, :order_id)
 #   end
 # end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -29,6 +29,7 @@ class User < ApplicationRecord
   def welcome_email
     if student?
       UserMailer.welcome_email(self).deliver_now
+      
     end
   end
 end

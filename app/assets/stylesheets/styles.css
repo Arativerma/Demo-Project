@@ -1,0 +1,52 @@
+/* Navbar background color */
+.navbar {
+  background-color: #0000FF; /* Replace with your desired background color */
+}
+
+/* Style the navbar links */
+.navbar a {
+  color: #FFFF00; /* Replace with your desired text color */
+  text-decoration: none; /* Remove underline from links */
+  padding: 10px 20px; /* Add padding to links for better spacing */
+}
+
+/* Change link color on hover */
+.navbar a:hover {
+  color: ##008080; /* Change text color when hovering over links */
+}
+
+
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Default background color */
+  color: #fff; /* Default text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover state for buttons */
+.button:hover {
+  background-color: #0056b3; /* Background color on hover */
+}
+
+/* Active state for buttons (when clicked) */
+.button:active {
+  background-color: #003e80; /* Background color when clicked */
+}
+
+/* Link styles */
+a {
+  color: #007bff; /* Default link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition for link color on hover */
+}
+
+/* Hover state for links */
+a:hover {
+  color: #0056b3; /* Link color on hover */
+}

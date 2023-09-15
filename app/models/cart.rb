@@ -23,22 +23,30 @@ class Cart < ApplicationRecord
 #   end
 # end
 
+ # def sub_total
+ #    sum = 0
+ #    self.line_items.each do |line_item|
+ #      sum+= line_item.total_price
+ #    end
+ #    return sum
+ #  end
 
 
 
- def total_items
-    line_items.sum(:quantity) # Summing the quantity of items, not price
-  end
 
-  def add_course(course_id)
-    current_item = line_items.find_by(course_id: course_id)
+ # def total_items
+ #    line_items.sum(:quantity) # Summing the quantity of items, not price
+ #  end
 
-    if current_item
-      current_item = line_items.create(course_id: course_id)
-    end
-  end
+ #  def add_course(course_id)
+ #    current_item = line_items.find_by(course_id: course_id)
 
-  def total_price
-    line_items.to_a.sum { |item| items.sum(:price) }
-  end
+ #    if current_item
+ #      current_item = line_items.create(course_id: course_id)
+ #    end
+ #  end
+
+ #  def total_price
+ #    line_items.to_a.sum { |item| items.sum(:price) }
+ #  end
 end

@@ -24,6 +24,7 @@
   <%= link_to 'Checkout', payment_create_path, class: 'btn btn-primary' %>
 <% else %>
   <p>Your cart is empty.</p>
+  <%= link_to 'Continue Shopping', courses_path, class: 'btn btn-secondary' %>
 <% end %>
 
-<%= link_to 'Continue Shopping', courses_path, class: 'btn btn-secondary' %>
+<%#= link_to 'Continue Shopping', courses_path, class: 'btn btn-secondary' %>

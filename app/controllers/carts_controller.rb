@@ -4,7 +4,10 @@ class CartsController < ApplicationController
   #   @cart = @current_user_cart
   # end
  def show
-    @current_cart ||= Cart.find_or_create_by(user_id: current_user.id)
+    @cart = Cart.find_by(user_id: params[:id])
+   @cart = @current_cart
+  # @line_items = @cart.line_items
+   # @current_cart ||= Cart.find_or_create_by(user_id: current_user.id)
   end
 
   def destroy
@@ -13,6 +16,8 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
     redirect_to root_path
   end
+
+
 
   def remove_item
     line_item = LineItem.find(params[:id])
@@ -23,7 +28,7 @@ class CartsController < ApplicationController
   def add_to_cart
     
     @course = Course.find_by(params[:course_id])
-   
+     #@line_item = @cart.line_items.build(course: @course, price: @course.price)
     @order = current_user.orders.create
 
     # Check if the course is already in the cart

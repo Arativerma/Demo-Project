@@ -1,42 +1,54 @@
-# class ApplicationController < ActionController::Base
-#   before_action :authenticate_user!
-#   before_action :initialize_cart
-#   before_action :configure_permitted_parameters, if: :devise_controller?
-#   rescue_from CanCan::AccessDenied do |exception|
-#     redirect_to root_path, alert: exception.message
-#   end
+class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
+  before_action :initialize_cart
+  before_action :set_current_cart
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, alert: exception.message
+  end
 
-#   private
+  private
 
-#   def initialize_cart
-#     if user_signed_in? && current_user.cart.nil?
-#       current_user.create_cart
-#     end
-#   end
+def set_current_cart
+  @current_cart = true
+end
 
-#   # Define the current_cart method to retrieve the user's cart.
-#   def current_cart
-#     @current_cart ||= current_user.cart
-#     if @current_cart.nil?
-#       @current_cart = Cart.create(user_id: current_user.id)
-#     end
-#     @current_cart
-#   end
 
-#   protected
+  # def initialize_cart
+  #   if user_signed_in? && current_user.cart.nil?
+  #     current_user.create_cart
+  #   end
+  # end
 
-#   def configure_permitted_parameters
-#     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
-#   end
+def initialize_cart
+     @cart = Cart.new
+    if user_signed_in? && current_user.cart.nil?
+      current_user.create_cart
+    end
+  end
+  # Define the current_cart method to retrieve the user's cart.
+  def current_cart
+    @current_cart ||= current_user.cart
+    if @current_cart.nil?
+      @current_cart = Cart.create(user_id: current_user.id)
+    end
+    @current_cart
+  end
 
-#   def after_sign_up_path_for(resource)
-#     new_user_session_path
-#   end
+  protected
 
-#   def after_sign_out_path_for(resource_or_scope)
-#     new_user_registration_path
-#   end
-# end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+  end
+
+  def after_sign_up_path_for(resource)
+    new_user_session_path
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_registration_path
+  end
+end
 
 
 
@@ -70,18 +82,37 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :initialize_cart
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :current_cart  # Added this line
+  #before_action :current_cart  # Added this line
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, alert: exception.message
   end
 
-  private
+ before_action :current_cart
 
-  def initialize_cart
-    if user_signed_in? && current_user.cart.nil?
-      current_user.create_cart
+  private
+    def current_cart
+      if session[:cart_id]
+        cart = Cart.find_by(:id => session[:cart_id])
+        if cart.present?
+          @current_cart = cart
+        else
+          session[:cart_id] = nil
+        end
+      end
+
+      if session[:cart_id] == nil
+        @current_cart = Cart.create
+        session[:cart_id] = @current_cart.id
+      end
     end
-  end
+  # private
+
+  # def initialize_cart
+  #    @cart = Cart.new
+  #   if user_signed_in? && current_user.cart.nil?
+  #     current_user.create_cart
+  #   end
+  # end
 
   protected
 
@@ -97,7 +128,7 @@ class ApplicationController < ActionController::Base
     new_user_registration_path
   end
 
-  private
+  #private
 
   # def current_cart
   #   byebug
@@ -111,13 +142,14 @@ class ApplicationController < ActionController::Base
   #     end
   #   end
   # end
-  
-  def current_cart
-    @cart = Cart.find_by(id: current_user.cart.id)
-    if @cart.present?
-      @current_cart = @cart
-    else
-      @current_cart = Cart.create(user_id: current_user.id)
-    end
-  end
+
+  # def current_cart
+  #   #byebug
+  #   @cart = Cart.find_by(id: current_user.cart.id)
+  #   if @cart.present?
+  #     @current_cart = @cart
+  #   else
+  #     @current_cart = Cart.create(user_id: current_user.id)
+  #   end
+  # end
 end

@@ -19,6 +19,14 @@ class HomesController < ApplicationController
       # Content for guests or unauthenticated users
       # You can display a welcome message or information about your application.
     end
+    def about
+       #@company_info = CompanyInfo.first
+        render 'home/about'
+    end
+    def contact
+      # @contact_info = ContactInfo.first
+        render 'home/contact'
+    end
   end
 end
 

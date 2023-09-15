@@ -20,9 +20,10 @@
 <p><%= @course.description %></p>
 <p><%= @course.price %></p>
 
-<%= button_to "Add to cart", line_items_path(:course_id => @course.id)%>
-<%#= link_to 'Add to Cart', add_to_cart_carts_path(@course.id), method: :post, class: 'btn bg-turquoise' %>
-<%#= link_to 'Cart', cart_path, class: 'btn bg-turquoise' %>
-<%= link_to 'Purchase', purchase_course_path(@course), class: 'btn btn-primary' %>
+<%# if can?(:add_to_cart, @course) %>
+  <%= button_to "Add to Cart", line_items_path(course_id: @course.id), method: :post %>
+  <%# button_to "Add to cart", line_items_path(:course_id => @course.id) %>
+<%# end %>
+
 <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-primary' %> |
 <%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>

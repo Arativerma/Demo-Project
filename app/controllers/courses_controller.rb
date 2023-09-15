@@ -97,7 +97,7 @@
 
 
 class CoursesController < ApplicationController
-  before_action :authenticate_user!, only: [:show] # Assuming Devise for authentication
+  #before_action :authenticate_user!, only: [:show] # Assuming Devise for authentication
 
   def index
     @courses = Course.all
@@ -109,7 +109,9 @@ class CoursesController < ApplicationController
   end
 
   def create
+    #authorize! :create, @course
     @course = Course.new(course_params)
+
     @course.category_id = params[:course][:category_id] # Associate with the chosen category
 
     if @course.save
@@ -121,6 +123,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+     #authorize! :read, @course
   end
 
   def cart
@@ -140,26 +143,26 @@ class CoursesController < ApplicationController
     redirect_to cart_path # Redirect to the cart page
   end
 
-  def search
-    @query = params[:query]
-    @category = params[:category]
-    @max_price = params[:max_price]
+  # def search
+  #   @query = params[:query]
+  #   @category = params[:category]
+  #   @max_price = params[:max_price]
 
-    # Build a query based on the search parameters
-    @courses = Course.all
+  #   # Build a query based on the search parameters
+  #   @courses = Course.all
 
-    @courses = @courses.where('title LIKE ?', "%#{@query}%") if @query.present?
-    @courses = @courses.where(category: @category) if @category.present?
-    @courses = @courses.where('price <= ?', @max_price) if @max_price.present?
-  end
+  #   @courses = @courses.where('title LIKE ?', "%#{@query}%") if @query.present?
+  #   @courses = @courses.where(category: @category) if @category.present?
+  #   @courses = @courses.where('price <= ?', @max_price) if @max_price.present?
+  # end
 
-  def purchase
-    # Fetch the selected course based on the ID
-    @course = Course.find(params[:id])
+  # def purchase
+  #   # Fetch the selected course based on the ID
+  #   @course = Course.find(params[:id])
 
-    flash[:notice] = 'Purchase process initiated. Payment integration pending.'
-    redirect_to @course
-  end
+  #   flash[:notice] = 'Purchase process initiated. Payment integration pending.'
+  #   redirect_to @course
+  # end
 
   private
 

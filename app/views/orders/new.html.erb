@@ -1,26 +1,17 @@
-<h2>Checkout</h2>
-<table>
-  <thead>
-    <!-- <tr>
-      <th>Course</th>
-      <th>Price</th>
-    </tr> -->
-  </thead>
-  <tbody>
-    <% if @order_items.present? %>
-      <% @order_items.each do |order_item| %>
-        <tr>
-          <td><%= order_item.course.title %></td>
-          <td><%= number_to_currency(order_item.course.price) %></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td>Your order failed.</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% if @order_items.present? %>
-  <%= link_to 'Place Order', orders_path, method: :post, class: 'btn btn-primary' %>
-<% end %>
+<%= form_for(@order) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, required: true, autofocus: true %>
+  </p>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </p>
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end

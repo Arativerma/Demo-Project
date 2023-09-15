@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  
+
     validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :currency, presence: true
     validates :payment_method_types, presence: true
@@ -10,3 +10,4 @@ class Payment < ApplicationRecord
     validates :billing_address, presence: true
   #belongs_to :users
 end
+
