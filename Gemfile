@@ -38,6 +38,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
    gem 'rspec-rails', '~> 6.0.0'
+    gem 'factory_bot_rails' # This gem integrates FactoryBot with Rails
+  gem 'faker' 
+  gem 'devise'
+  gem 'rails-controller-testing'
 end
 group :test do
   gem 'shoulda-matchers', '~> 5.0'
@@ -60,6 +64,8 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  # gem 'factory_bot_rails'
+  # gem 'faker'
 
 end
 

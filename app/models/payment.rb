@@ -8,6 +8,6 @@ class Payment < ApplicationRecord
     validates :expiration_year, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: Time.current.year }
     validates :cardholder_name, presence: true
     validates :billing_address, presence: true
-  #belongs_to :users
+    belongs_to :user
 end
 

@@ -1,7 +1,8 @@
 <div class="cart-container">
   <h2>Cart</h2>
   <ul>
-    <% @cart.line_items.each do |line_item| %>
+
+    <% @line_items.each do |line_item| %>
       <li class="cart-item">
         <div class="item-details">
           Item: <%= line_item.course.title %><br>
@@ -9,11 +10,17 @@
         </div>
         <!-- Buttons for cart actions -->
         <div class="cart-buttons">
-          <%= link_to "Remove item", remove_item_cart_path(:id => line_item), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= link_to "Remove item", remove_item_cart_path(id: line_item.id), method: :delete, data: { confirm: "Are you sure?" } %>
+           <%#= link_to "Remove item", line_item_path(@line_item), method: :delete, data: { confirm: "Are you sure?" } %>
+
         </div>
       </li>
     <% end %>
   </ul>
   <%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>
+
+  <% if @line_items.present? %>
   <%= button_to "Checkout", new_payment_path, class: "btn btn-primary" %>
+<% end %>
+  <%#= button_to "Checkout", payment_path(current_user.id), class: "btn btn-primary" %>
 </div>

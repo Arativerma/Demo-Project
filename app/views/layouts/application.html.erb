@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-     <%= stylesheet_link_tag 'styles' %>
+      <%= stylesheet_link_tag 'styles' %>
   </head>
 
   <body>
@@ -23,21 +23,12 @@
     <li class="nav-item">
        <li><%= link_to 'Home', root_path %></li>
     </li></ul>
-
-    <ul><li class="nav-item">
+     <ul><li class="nav-item">
      <li><%= link_to 'About', about_path %></li>
     </li></ul>
     <ul><li class="nav-item">
       <li><%= link_to 'Contact', contact_path %></li>
-    </li>
-    <!-- Add more navigation links as needed -->
-    
- 
-  
-  
-  <!-- Add other navigation links as needed -->
-
-  </ul>
+    </li></ul>
   </nav>
      <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
      <%#= stylesheet_link_tag 'courses', media: 'all' %> 
@@ -59,65 +50,4 @@
   </body>
 </html>
 
-     <%# if user_signed_in? && current_user.student? %>
-  <%#= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-<%# end %>
-<%# else %>
- <%#= link_to "Sign Up", new_user_registration_path %>
-
-
-  <!-- app/views/layouts/application.html.erb or within your view file -->
- 
-<!-- <script>
-  // Create a Stripe object.
-  var stripe = Stripe('<%#= Rails.configuration.stripe[:publishable_key] %>');
-
-  // Create an instance of Elements.
-  var elements = stripe.elements();
-
-  // Create a card Element and add it to the card-element div.
-  var card = elements.create('card');
-  card.mount('#card-element');
-
-  // Handle real-time validation errors from the card Element.
-  card.on('change', function(event) {
-    var displayError = document.getElementById('card-errors');
-    if (event.error) {
-      displayError.textContent = event.error.message;
-    } else {
-      displayError.textContent = '';
-    }
-  });
-
-  // Create a token or handle the payment submission when the form is submitted.
-  var form = document.getElementById('payment-form');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    stripe.createToken(card).then(function(result) {
-      if (result.error) {
-        // Inform the user if there was an error.
-        var errorElement = document.getElementById('card-errors');
-        errorElement.textContent = result.error.message;
-      } else {
-        // Send the token to your server to process the payment.
-        stripeTokenHandler(result.token);
-      }
-    });
-  });
-
-  // Submit the form with the token ID.
-  function stripeTokenHandler(token) {
-    // Insert the token ID into the form so it gets submitted to the server.
-    var form = document.getElementById('payment-form');
-    var hiddenInput = document.createElement('input');
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', 'stripeToken');
-    hiddenInput.setAttribute('value', token.id);
-    form.appendChild(hiddenInput);
-
-    // Submit the form.
-    form.submit();
-  }
-</script> -->
- 
+   

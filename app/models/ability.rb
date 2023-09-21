@@ -1,47 +1,29 @@
-# frozen_string_literal: true
 class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # Guest user (not logged in)
-    
+    user ||= AdminUsers.new # Guest user
 
     if user.admin?
-      can :manage, :all # Admin can manage all resources
-    elsif user.teacher?
-      can :manage, Category # Teacher can manage categories
-      can :manage, Course, user_id: user.id # Teacher can manage their own courses
+      can :manage, :all
+      can :manage, Course
+       can :read, Course 
+       can :manage, Category 
     elsif user.student?
-      can :read, Category # Student can read categories
-      can :read, Course # Student can read courses
-      can :purchase, Course # Student can purchase courses
-    end 
- 
+      can :read, Course
+      can :purchase, Course
+      # Add more abilities specific to students
+    elsif user.teacher?
+      can :read, Course
 
+      can :manage, Course
 
-    # Define abilities for the user here. For example:
-    #
-    #   return unless user.present?
-    #   can :read, :all
-    #   return unless user.admin?
-    #   can :manage, :all
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.P
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, published: true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+      can :manage, Category
+      # Add more abilities specific to teachers
+    else
+      # Guest user abilities (unauthenticated)
+      can :read, Course
+      # Add more abilities for guest users
+    end
   end
 end

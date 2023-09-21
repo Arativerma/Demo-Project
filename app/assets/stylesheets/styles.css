@@ -1,18 +1,20 @@
 /* Navbar background color */
 .navbar {
-  background-color: #0000FF; /* Replace with your desired background color */
+   background-color: #20c997;
+    color: #17a2b8;
+    padding: 10px;
 }
 
 /* Style the navbar links */
 .navbar a {
-  color: #FFFF00; /* Replace with your desired text color */
-  text-decoration: none; /* Remove underline from links */
-  padding: 10px 20px; /* Add padding to links for better spacing */
+    color: #6610f2;
+    text-decoration: none;
+    margin: 0 30px;
 }
 
 /* Change link color on hover */
 .navbar a:hover {
-  color: ##008080; /* Change text color when hovering over links */
+  color: ##0080; /* Change text color when hovering over links */
 }
 
 
@@ -31,7 +33,7 @@
 
 /* Hover state for buttons */
 .button:hover {
-  background-color: #0056b3; /* Background color on hover */
+  background-color: #fff; /* Background color on hover */
 }
 
 /* Active state for buttons (when clicked) */

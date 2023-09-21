@@ -19,15 +19,20 @@
 </td><%#= button_to "Add to cart", line_items_path(:course_id => course.id)%>
 
       <td><%= link_to 'Show', course %></td>
+      <% if can?(:edit, @course) %>
       <td><%= link_to 'Edit', edit_course_path(course) %></td>
+      <% end %>
+       <% if can?(:destroy, @course) %>
       <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
 
 <br>
-
+ <% if can?(:manage, @course) %>
 <%= link_to 'New Course', new_course_path %>
+<% end %>
 
 
 

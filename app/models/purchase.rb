@@ -1,4 +1,5 @@
 class Purchase < ApplicationRecord
-  #belongs_to :student, class_name: 'User'
-  belongs_to :course
+  belongs_to :user
+  belongs_to :order
+  belongs_to :payment
 end

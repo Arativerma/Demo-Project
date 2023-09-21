@@ -1,5 +1,18 @@
 ActiveAdmin.register User do
+ permit_params :email, :password, :password_confirmation, :role
 
+  form do |f|
+    f.inputs "User Details" do
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+      f.input :role, as: :select, collection: User.roles.keys # Assuming 'roles' is an enum field
+    end
+    f.actions
+  end
+
+  # ...
+end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -15,4 +28,3 @@ ActiveAdmin.register User do
   #   permitted
   # end
   
-end

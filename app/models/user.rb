@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :courses, foreign_key: 'teacher_id'
   has_many :categories, foreign_key: 'teacher_id'
   has_many :purchases, foreign_key: 'student_id'
+  has_many :payments
 
   after_create :welcome_email
  before_create :set_default_role

@@ -1,55 +1,38 @@
- class OrdersController < ApplicationController
+class OrdersController < ApplicationController
   before_action :authenticate_user!
-
-  def create
-    @order = current_user.orders.create(order_params)
-    @order.total = calculate_order_total(@order)
-
-    if @order.save
-      clear_cart
-      redirect_to @order, notice: 'Order was successfully placed.'
-    else
-      render 'carts/show'
-    end
-  end
-
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
   def index
-    @orders = current_user.orders
-    # Add logic to load all orders for the current user
-    # ...
-
-    # Render the order history view
-    render 'index'
+    @orders = Order.all
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
-    # Add logic to load order details and associated line items
-    # ...
-
-    if @order
-      # Render the order details view
-      render 'show'
-    else
-      flash[:error] = "Order not found."
-      redirect_to orders_path # Redirect to order history with an error message
-    end
+    @order = Order.find(params[:id])
   end
 
-  private
+  def new
+    @order = Order.new
+  end
+  
+  def create
+  @order = Order.new(order_params)
+  @current_cart.line_items.each do |item|
+    @order.line_items << item
+    item.cart_id = nil
+  end
+  @order.save
+  Cart.destroy(session[:cart_id])
+  session[:cart_id] = nil
+  redirect_to root_path
+end
 
-  def order_params
-    params.require(:order).permit(:user_id)
+private
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 
-  def calculate_order_total(order)
-    # Implement logic to calculate the total price of the order
-    # You can calculate the total by summing the prices of the associated line items
-    order.line_items.sum(&:price)
-  end
-
-  def clear_cart
-    # Implement logic to clear the user's cart after placing an order
-    current_user.cart.line_items.destroy_all
+def order_params
+    params.require(:order).permit(:status, :total_amount, :shipping_address, :billing_address, :payment_method)
   end
 end
+

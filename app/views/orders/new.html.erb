@@ -1,17 +1,4 @@
-<%= form_for(@order) do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true, autofocus: true %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </p>
-  <p>
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end
+<!-- app/views/orders/new.html.erb -->
+<h1>New Order</h1>
+<%= render 'form' %>
+<%= link_to 'Back to Orders', orders_path %>

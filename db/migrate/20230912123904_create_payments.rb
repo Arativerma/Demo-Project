@@ -10,7 +10,7 @@ class CreatePayments < ActiveRecord::Migration[6.1]
       t.string :cardholder_name
       t.string :billing_address
       t.string :payment_status
-      t.references :users, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

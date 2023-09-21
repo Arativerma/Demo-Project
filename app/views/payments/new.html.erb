@@ -1,5 +1,5 @@
-<%#= form_with(model: @payment, url: payment_create_path, method: :post) do |form| %>
-<%= form_for @payment do |form| %>
+<%#= form_with(model: @payment, url:  payments_path(current_user.id), method: :post) do |form| %>
+ <%= form_for @payment do |form| %> 
   <h2>checkout</h2>
 
   <!-- Display any validation errors -->
